@@ -1,0 +1,14 @@
+{
+  "name": "nel",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Christoph Koschel",
+  "license": "MIT",
+  "description": "",
+  "dependencies": {
+    "@koschel-christoph/node.options": "^1.1.0"
+  }
+}
