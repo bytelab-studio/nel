@@ -34,6 +34,11 @@ export default function* install(): Generator<OptionSet> {
 	}
 
 	const servers: ServerConfig[] = config.getServers();
+	if (servers.length == 0) {
+		console.warn("WARN: Aborting no servers are configurated.");
+		return;
+	}
+
 	proxy  = proxy == null ? config.getProxy() : proxy;
 
 	(async () => {
@@ -43,8 +48,7 @@ export default function* install(): Generator<OptionSet> {
 				const [name, version] = extractDetails(pack);
 				const info: PackageInfo | null = await server.lookup(s, {
 					name: name,
-					version: version,
-					platform: process.platform
+					version: version
 				});
 				if (!info) {
 					continue;

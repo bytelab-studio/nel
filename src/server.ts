@@ -9,7 +9,6 @@ export interface PackageInfo {
 export interface LookupParameters {
 	name: string;
 	version: string;
-	platform: string;
 }
 
 class ServerHandler {
