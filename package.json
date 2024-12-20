@@ -9,6 +9,11 @@
   "license": "MIT",
   "description": "",
   "dependencies": {
-    "@koschel-christoph/node.options": "^1.1.0"
+    "@koschel-christoph/node.options": "^1.1.0",
+    "axios": "^1.7.9",
+    "semver": "^7.6.3"
+  },
+  "devDependencies": {	 
+    "@types/semver": "^7.5.8"
   }
 }
