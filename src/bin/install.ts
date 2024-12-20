@@ -1,11 +1,11 @@
 import {OptionSet, SubCommandSet} from "@koschel-christoph/node.options";
 
 import {config, ServerConfig} from "../config";
-import {server} from "../server";
+import {server, PackageInfo} from "../server";
 import {npm} from "../npm";
 
-function extractDetails(): [string, string] {
-	const [name, version] = package.split('@');
+function extractDetails(pack: string): [string, string] {
+	const [name, version] = pack.split('@');
   
 	return [name, version || 'latest'];
 }
@@ -33,14 +33,14 @@ export default function* install(): Generator<OptionSet> {
 		return;
 	}
 
-	const servers: ServerConfig = config.getServers();
-	const proxy: string | null = proxy == null ? servers.getProxy() : proxy;
+	const servers: ServerConfig[] = config.getServers();
+	proxy  = proxy == null ? config.getProxy() : proxy;
 
 	(async () => {
-		for (const package of packages) {
+		for (const pack of packages) {
 			for (const s of servers) {
 				// TODO implement auth
-				const [name, version] = extractDetails(package);
+				const [name, version] = extractDetails(pack);
 				const info: PackageInfo | null = await server.lookup(s, {
 					name: name,
 					version: version,
@@ -49,7 +49,7 @@ export default function* install(): Generator<OptionSet> {
 				if (!info) {
 					continue;
 				}	
-				await npm.install(info.downloadURL);
+				await npm.install(info);
 			}
 		}
 	})();

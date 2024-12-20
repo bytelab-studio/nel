@@ -4,7 +4,7 @@ import {PackageInfo} from "./server";
 
 
 class NPMHandler {
-	public install(info: PackageInfo): Promise<void> {
+	public async install(info: PackageInfo): Promise<void> {
 		await child_process.exec(`npm install ${info.downloadURL}`);
 	}
 }
