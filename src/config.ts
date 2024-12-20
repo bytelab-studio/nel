@@ -65,6 +65,6 @@ class ConfigHandler {
 }
 
 export const config: ConfigHandler = new ConfigHandler(process.platform == "win32" 
-														? path.join(os.homedir(), 'AppData', 'Roaming')  
-														: "~/.nelrc"
+														? path.join(os.homedir(), "AppData", "Roaming", ".nelrc")  
+														: path.join(os.homedir(), ".nelrc")
 													  );
